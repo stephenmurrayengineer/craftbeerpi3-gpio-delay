@@ -29,7 +29,7 @@ class GPIODelay(ActorBase):
 
     switched_off_at = None
 
-    def init(self):
+    def __init__(self):
         gpio = int(self.gpio)
         GPIO.setup(gpio, GPIO.OUT)
         GPIO.output(gpio, 0)
