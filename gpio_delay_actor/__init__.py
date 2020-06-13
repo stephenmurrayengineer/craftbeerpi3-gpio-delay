@@ -17,19 +17,17 @@ except Exception as e:
 @cbpi.actor
 class GPIODelay(ActorBase):
 
-    gpio = Property.Select("GPIO", options=range(28),
-                           description="GPIO pin number")
-    delay = Property.Number(
-        "Minimum delay",
-        configurable=True,
-        default_value=300,
-        unit="s",
-        description="Minimum wait time before switching on (s)",
-    )
-
-    switched_off_at = None
-
     def __init__(self):
+        self.gpio = Property.Select("GPIO", options=range(28),
+                           description="GPIO pin number")
+        self.delay = Property.Number(
+            "Minimum delay",
+            configurable=True,
+            default_value=300,
+            unit="s",
+            description="Minimum wait time before switching on (s)",
+        )
+        self.switched_off_at = None
         gpio = int(self.gpio)
         GPIO.setup(gpio, GPIO.OUT)
         GPIO.output(gpio, 0)
